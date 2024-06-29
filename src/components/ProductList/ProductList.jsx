@@ -3,6 +3,6 @@ import React from 'react'
 
 export const ProductList = () => {
   return (
-    <div>ProductList</div>
+    <div className={css.prod}>ProductList</div>
   )
 }
