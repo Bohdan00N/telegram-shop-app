@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./App.css";
+import css from "./App.module.scss";
 import { useTG } from "./hooks/useTG";
 
 
@@ -15,7 +15,7 @@ function App() {
   }, [tg]);
 
   return (
-    <div className="App">
+    <div className={css.app}>
       <button onClick={onToggleButton}></button>
     </div>
   );
