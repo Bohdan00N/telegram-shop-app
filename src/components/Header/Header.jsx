@@ -4,7 +4,7 @@ import { Button } from "../Button/Button";
 import { useTG } from "../../hooks/useTG";
 
 export const Header = () => {
- const {user, onClose} = useTG();
+  const { user, onClose } = useTG();
   return (
     <div className={css.header}>
       <Button onClick={onClose}>Закрити</Button>
