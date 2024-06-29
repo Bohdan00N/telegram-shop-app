@@ -3,8 +3,9 @@ import css from "./App.module.scss";
 import { useTG } from "./hooks/useTG";
 import { Button } from "./components/Button/Button";
 import { Header } from "./components/Header/Header";
-import { Form, Route, Routes } from "react-router-dom";
-import { ProductList } from "./components/ProductList/ProductList";
+import { Route, Routes } from "react-router-dom";
+import { ProductList } from "./components/ProductList/ProductList.jsx";
+import { Form } from "./components/Form/Form.jsx";
 
 function App() {
   const { onToggleButton, tg } = useTG();
