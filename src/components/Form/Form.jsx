@@ -12,7 +12,7 @@ export const Form = () => {
     tg.MainButton.setParams({
       text: "Відправити",
     });
-  }, []);
+  }, [tg.MainButton]);
 
   useEffect(() => {
     if (!city || !street) {
@@ -20,7 +20,7 @@ export const Form = () => {
     } else {
       tg.MainButton.show();
     }
-  }, [city, street]);
+  }, [city, street, tg.MainButton]);
 
   const onChangeCity = (e) => {
     setCity(e.target.value);
