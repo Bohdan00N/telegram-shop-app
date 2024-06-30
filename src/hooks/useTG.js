@@ -16,5 +16,6 @@ export function useTG() {
     onToggleButton,
     tg,
     user: tg.initDataUnsafe?.user,
+    queryId: tg.initDataUnsafe?.queryId,
   };
 }

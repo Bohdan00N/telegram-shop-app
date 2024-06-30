@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <div className={css.header}>
       <button onClick={onClose}>Закрити</button>
-      <span className={"username"}>{user?.username}</span>
+      <span className={css.username}>{user?.username}</span>
     </div>
   );
 };

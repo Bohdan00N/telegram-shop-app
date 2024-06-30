@@ -1,12 +1,28 @@
 import { useTG } from "../../hooks/useTG";
 import css from "./form.module.scss";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-export const Form = () => {
+const Form = () => {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [subject, setSubject] = useState("physical");
   const { tg } = useTG();
+
+  const onSendData = useCallback(() => {
+    const data = {
+      city,
+      street,
+      subject,
+    };
+    tg.sendData(JSON.stringify(data));
+  }, [city, street, subject, tg]);
+
+  useEffect(() => {
+    tg.onEvent("mainButtonClicked", onSendData);
+    return () => {
+      tg.offEvent("mainButtonClicked", onSendData);
+    };
+  }, [onSendData, tg]);
 
   useEffect(() => {
     tg.MainButton.setParams({
@@ -53,8 +69,7 @@ export const Form = () => {
         className={css.select}
         value={subject}
         onChange={onChangeSubject}
-        name=""
-        id=""
+        
       >
         <option value="physical">Fiz</option>
         <option value="legal">Yur</option>
@@ -62,3 +77,4 @@ export const Form = () => {
     </div>
   );
 };
+export default Form;
