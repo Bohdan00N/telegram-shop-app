@@ -24,7 +24,7 @@ const getTotalPrice = (items = []) => {
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const {tg, queryId} = useTG();
-
+console.log( queryId);
     const onSendData = useCallback(() => {
         const data = {
             products: addedItems,
