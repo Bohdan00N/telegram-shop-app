@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import css from "./productList.module.scss";
 import ProductItem from "../ProductItem/ProductItem";
 import { useTG } from "../../hooks/useTG";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
@@ -61,23 +62,36 @@ const getTotalPrice = (items = []) => {
 };
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const [addedItems, setAddedItems] = useState([]);
   const { tg, queryId } = useTG();
   console.log(queryId);
-  const onSendData = useCallback(() => {
+
+  const onSendData = useCallback(async () => {
     const data = {
       products: addedItems,
       totalPrice: getTotalPrice(addedItems),
       queryId,
     };
-    fetch("http://localhost:3001/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  }, [addedItems, queryId]);
+
+    try {
+      const response = await fetch("http://localhost:3001/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send order data");
+      }
+
+      navigate("/form");
+    } catch (error) {
+      console.error("Error sending order data:", error);
+    }
+  }, [addedItems, navigate, queryId]);
 
   useEffect(() => {
     console.log("Setting up event listener for mainButtonClicked");
