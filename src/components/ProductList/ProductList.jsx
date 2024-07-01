@@ -42,7 +42,7 @@ const ProductList = () => {
     const data = {
       products: addedItems,
       totalPrice: getTotalPrice(addedItems),
-      queryId: queryId,
+      queryId,
     };
 
     try {
