@@ -20,7 +20,6 @@ const getTotalPrice = (items = []) => {
         return acc += item.price
     }, 0)
 }
-
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const {tg, queryId} = useTG();
@@ -31,7 +30,7 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        fetch('http://192.168.1.108:3001/order', {
+        fetch(`${process.env.LINK}/order`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
