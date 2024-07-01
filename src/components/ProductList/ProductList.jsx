@@ -42,6 +42,7 @@ const ProductList = () => {
     const data = {
       products: addedItems,
       totalPrice: getTotalPrice(addedItems),
+      queryId: queryId,
     };
 
     try {
@@ -61,7 +62,7 @@ const ProductList = () => {
     } catch (error) {
       console.error("Error sending order data:", error);
     }
-  }, [addedItems, navigate]);
+  }, [addedItems, navigate, queryId]);
 
   useEffect(() => {
     console.log("Setting up event listener for mainButtonClicked");
