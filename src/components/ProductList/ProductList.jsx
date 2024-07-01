@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import css from './productList.module.scss';
 import ProductItem from "../ProductItem/ProductItem";
 import {useTG} from "../../hooks/useTG";
-import {useCallback, useEffect} from "react";
 
 const products = [
     {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые'},
@@ -20,6 +19,8 @@ const getTotalPrice = (items = []) => {
         return acc += item.price
     }, 0)
 }
+
+
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const {tg, queryId} = useTG();
@@ -30,7 +31,7 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        fetch(`${process.env.LINK}/order`, {
+        fetch('http://localhost:3001/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,6 +78,9 @@ const ProductList = () => {
                     className={css.item}
                 />
             ))}
+        <div className={css.btn}>
+            <button onClick={onSendData}>Сделать заказ</button>
+        </div>
         </div>
     );
 };
