@@ -41,8 +41,10 @@ console.log( queryId);
     }, [addedItems, queryId])
 
     useEffect(() => {
+        console.log('Setting up event listener for mainButtonClicked');
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
+            console.log('Removing event listener for mainButtonClicked');
             tg.offEvent('mainButtonClicked', onSendData)
         }
     }, [onSendData, tg])
