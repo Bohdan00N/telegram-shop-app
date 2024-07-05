@@ -79,7 +79,6 @@ const ProductList = () => {
       {products.map((item) => (
         <ProductItem product={item} onAdd={onAdd} className={css.item} />
       ))}
-      <button onClick={onSendData}>?</button>
     </div>
   );
 };
