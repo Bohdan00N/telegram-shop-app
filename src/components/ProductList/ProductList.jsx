@@ -26,7 +26,7 @@ const ProductList = () => {
     };
 
     try {
-      const response = await fetch("https://naliva.space/order", {
+      const response = await fetch("https://45.94.157.86:3000/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
