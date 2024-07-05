@@ -3,28 +3,8 @@ import css from "./productList.module.scss";
 import ProductItem from "../ProductItem/ProductItem";
 import { useTG } from "../../hooks/useTG";
 import { useNavigate } from "react-router-dom";
+import { products } from "../utils/products";
 
-const products = [
-  {
-    id: "1",
-    title: "Джинсы",
-    price: 50,
-    description: "Синего цвета, прямые",
-  },
-  {
-    id: "2",
-    title: "Куртка",
-    price: 100,
-    description: "Зеленого цвета, теплая",
-  },
-  {
-    id: "3",
-    title: "Майка",
-    price: 50,
-    description: "Синего цвета, прямые",
-  },
-  
-];
 
 const getTotalPrice = (items = []) => {
   return items.reduce((acc, item) => {
