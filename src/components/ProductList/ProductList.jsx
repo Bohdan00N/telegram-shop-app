@@ -5,7 +5,6 @@ import { useTG } from "../../hooks/useTG";
 import { useNavigate } from "react-router-dom";
 import { products } from "../utils/products";
 
-
 const getTotalPrice = (items = []) => {
   return items.reduce((acc, item) => {
     return (acc += item.price);
@@ -26,7 +25,7 @@ const ProductList = () => {
     };
 
     try {
-      const response = await fetch("https://45.94.157.86:3000/order", {
+      const response = await fetch("https://naliva.space/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,6 +79,7 @@ const ProductList = () => {
       {products.map((item) => (
         <ProductItem product={item} onAdd={onAdd} className={css.item} />
       ))}
+      <button onClick={onSendData}>?</button>
     </div>
   );
 };
