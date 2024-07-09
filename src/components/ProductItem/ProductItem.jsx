@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Button/Button";
 import css from "./productItem.module.scss";
 
 const ProductItem = ({ product, onAdd }) => {
+  const [showPlusOne, setShowPlusOne] = useState(false);
+
   const onAddHandler = () => {
     onAdd(product);
+    setShowPlusOne(true); // Показываем "+1"
+    
+    // Скрываем "+1" через 1 секунду
+    setTimeout(() => {
+      setShowPlusOne(false);
+    }, 800);
   };
 
   return (
@@ -23,6 +31,7 @@ const ProductItem = ({ product, onAdd }) => {
       <Button className={css.add_btn} onClick={onAddHandler}>
         Додати в корзину
       </Button>
+      {showPlusOne && <span className={css.plus_one}>+1</span>}
     </div>
   );
 };

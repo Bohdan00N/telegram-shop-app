@@ -1,23 +1,21 @@
 .header {
   width: 100%;
-  padding: 20px;
-  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(45deg, #2980b9, #6dd5fa, #ffffff);
-  position: relative;
+  position: fixed;
   text-align: center;
   overflow: hidden;
-
-  .headerh1 {
-    font-size: 2rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    color: #fff;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  }
+}
+.headerh1 {
+  margin: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #fff;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }

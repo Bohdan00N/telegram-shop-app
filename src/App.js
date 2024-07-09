@@ -3,8 +3,8 @@ import css from "./App.module.scss";
 import { useTG } from "./hooks/useTG.js";
 import { Header } from "./components/Header/Header.jsx";
 import { Route, Routes } from "react-router-dom";
-import  ProductList  from "./components/ProductList/ProductList.jsx";
-import  Form  from "./components/Form/Form.jsx";
+import ProductList from "./components/ProductList/ProductList.jsx";
+import Form from "./components/Form/Form.jsx";
 
 function App() {
   const { tg } = useTG();

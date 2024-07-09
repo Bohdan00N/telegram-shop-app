@@ -23,16 +23,6 @@ $shadow-color: rgba(0, 0, 0, 0.2);
     transform: translateY(-10px);
     box-shadow: 0 8px 16px $shadow-color;
   }
-
-  @media screen and (max-width: 500px) {
-    flex: 1 0 calc(100% - 20px);
-  }
-  @media screen and (min-width: 501px) and (max-width: 800px) {
-    flex: 1 0 calc(50% - 20px);
-  }
-  @media screen and (min-width: 801px) and (max-width: 1300px) {
-    flex: 1 0 calc(33.33% - 20px);
-  }
 }
 
 .imgcont {
@@ -72,6 +62,15 @@ $shadow-color: rgba(0, 0, 0, 0.2);
   overflow: auto;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  @media screen and (max-width: 500px) {
+    flex: 1 0 calc(100% - 20px);
+    height: auto;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .price {
@@ -109,14 +108,10 @@ $shadow-color: rgba(0, 0, 0, 0.2);
     transform: scale(1);
   }
 }
-.flyout {
+.plus_one {
   position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #18bc9c;
-  opacity: 1;
-  animation: flyoutAnimation 1s forwards;
+  color: #11e91c; 
+  transition: opacity 0.8s ease; 
 }
-
