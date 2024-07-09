@@ -23,7 +23,6 @@ const ProductItem = ({ product, onAdd }) => {
       <Button className={css.add_btn} onClick={onAddHandler}>
         Додати в корзину
       </Button>
-      <div class={css.flyout}>+1</div>
     </div>
   );
 };
