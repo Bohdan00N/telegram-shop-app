@@ -12,6 +12,7 @@ const ProductItem = ({ product, onAdd }) => {
       <div className={css.imgcont}>
         <img className={css.img} alt="" src={product.image} />
       </div>
+      <div className={css.details}></div>
       <h2 className={css.title}>{product.title}</h2>
       <h6 className={css.description}>{product.description}</h6>
       <h3 className={css.price}>
@@ -22,6 +23,7 @@ const ProductItem = ({ product, onAdd }) => {
       <Button className={css.add_btn} onClick={onAddHandler}>
         Додати в корзину
       </Button>
+      <div class={css.flyout}>+1</div>
     </div>
   );
 };
