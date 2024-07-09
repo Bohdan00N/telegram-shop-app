@@ -5,17 +5,17 @@ import React, { useCallback, useEffect, useState } from "react";
 const Form = () => {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
-  const [subject, setSubject] = useState("physical");
+  const [phone, setPhone] = useState("");
   const { tg } = useTG();
 
   const onSendData = useCallback(() => {
     const data = {
       city,
       street,
-      subject,
+      phone,
     };
     tg.sendData(JSON.stringify(data));
-  }, [city, street, subject, tg]);
+  }, [city, street, phone, tg]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
@@ -44,36 +44,33 @@ const Form = () => {
   const onChangeStreet = (e) => {
     setStreet(e.target.value);
   };
-  const onChangeSubject = (e) => {
-    setSubject(e.target.value);
+  const onChangePhone = (e) => {
+    setPhone(e.target.value);
   };
 
   return (
     <div className={css.form}>
       <h3>Ваші данні</h3>
+      <select className={css.select} value={phone} onChange={onChangeCity}>
+        <option value="Lozova">Лозова</option>
+        <option value="Uman">Умань</option>
+      </select>
+
       <input
         className={css.input}
         type="text"
-        placeholder="Місто"
-        value={city}
-        onChange={onChangeCity}
-      />
-      <input
-        className={css.input}
-        type="text"
-        placeholder="Вулиця"
+        placeholder="Адреса"
         value={street}
         onChange={onChangeStreet}
       />
-      <select
-        className={css.select}
-        value={subject}
-        onChange={onChangeSubject}
-        
-      >
-        <option value="physical">Fiz</option>
-        <option value="legal">Yur</option>
-      </select>
+
+      <input
+        className={css.input}
+        type="number"
+        placeholder="Номер телефону"
+        value={phone}
+        onChange={onChangePhone}
+      />
     </div>
   );
 };
