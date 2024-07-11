@@ -5,6 +5,7 @@ import { Header } from "./components/Header/Header.jsx";
 import { Route, Routes } from "react-router-dom";
 import ProductList from "./components/ProductList/ProductList.jsx";
 import Form from "./components/Form/Form.jsx";
+import { CartProvider } from "./hooks/cartContext.js";
 
 function App() {
   const { tg } = useTG();
@@ -15,11 +16,13 @@ function App() {
 
   return (
     <div className={css.app}>
-      <Header />
-      <Routes>
-        <Route index element={<ProductList />} />
-        <Route path={"form"} element={<Form />} />
-      </Routes>
+      <CartProvider>
+        <Header />
+        <Routes>
+          <Route index element={<ProductList />} />
+          <Route path={"form"} element={<Form />} />
+        </Routes>
+      </CartProvider>
     </div>
   );
 }

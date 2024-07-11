@@ -1,20 +1,22 @@
 import { useTG } from "../../hooks/useTG";
 import css from "./form.module.scss";
 import React, { useCallback, useEffect, useState } from "react";
+import { useCart } from "../../hooks/cartContext";
 
-const Form = ({ addedItems, getTotalPrice, queryId }) => {
+const Form = () => {
   const [formFilled, setFormFilled] = useState({
     city: "",
     street: "",
     phone: "",
   });
-  const { tg } = useTG();
+  const { tg, queryId } = useTG();
+  const { addedItems, getTotalPrice } = useCart();
 
   const onSendData = useCallback(async () => {
     const data = {
       clientData: [formFilled],
       products: addedItems,
-      totalPrice: getTotalPrice(addedItems),
+      totalPrice: getTotalPrice(),
       queryId,
     };
 
@@ -43,7 +45,6 @@ const Form = ({ addedItems, getTotalPrice, queryId }) => {
   }, [onSendData, tg]);
 
   useEffect(() => {
-    // Установка параметров кнопки в зависимости от заполненности формы
     if (formFilled.city && formFilled.street && formFilled.phone) {
       tg.MainButton.show();
       tg.MainButton.setParams({
@@ -64,13 +65,14 @@ const Form = ({ addedItems, getTotalPrice, queryId }) => {
 
   return (
     <div className={css.form}>
-      <h3>Ваши данные</h3>
+      <h3>Дані замовлення</h3>
       <select
         className={css.select}
-        name="city" // "city" с маленькой буквы
+        name="city" 
         value={formFilled.city}
         onChange={onChangeField}
       >
+        <option value=""></option>
         <option value="Lozova">Лозова</option>
         <option value="Uman">Умань</option>
       </select>
@@ -86,12 +88,13 @@ const Form = ({ addedItems, getTotalPrice, queryId }) => {
 
       <input
         className={css.input}
-        type="text" // Изменил на "text" для номера телефона
+        type="tel" 
         placeholder="Номер телефону"
         name="phone"
         value={formFilled.phone}
         onChange={onChangeField}
       />
+      <button onClick={onSendData}>--------</button>
     </div>
   );
 };
