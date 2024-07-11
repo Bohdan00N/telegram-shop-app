@@ -14,7 +14,7 @@ const ProductList = () => {
   const onShowForm = useCallback(() => {
     navigate("form");
     tg.MainButton.setParams({
-      text: "Заполните форму",
+      text: "Перейти до оплати",
     });
   }, [tg, navigate]);
 
@@ -27,7 +27,7 @@ const ProductList = () => {
 
   const onAdd = (product) => {
     const alreadyAdded = addedItems.find((item) => item.id === product.id);
-    
+
     if (alreadyAdded) {
       removeItem(product.id);
     } else {
@@ -54,8 +54,6 @@ const ProductList = () => {
           className={css.item}
         />
       ))}
-
-      <button onClick={onShowForm}>Далі</button>
     </div>
   );
 };

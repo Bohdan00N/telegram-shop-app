@@ -94,7 +94,6 @@ const Form = () => {
         value={formFilled.phone}
         onChange={onChangeField}
       />
-      <button onClick={onSendData}>--------</button>
     </div>
   );
 };
