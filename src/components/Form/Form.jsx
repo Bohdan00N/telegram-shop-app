@@ -43,16 +43,14 @@ const Form = ({ addedItems, getTotalPrice, queryId }) => {
   }, [onSendData, tg]);
 
   useEffect(() => {
-    tg.MainButton.setParams({
-      text: "Отправить",
-    });
-  }, [tg.MainButton]);
-
-  useEffect(() => {
-    if (!formFilled.city || !formFilled.street || !formFilled.phone) {
-      tg.MainButton.hide();
-    } else {
+    // Установка параметров кнопки в зависимости от заполненности формы
+    if (formFilled.city && formFilled.street && formFilled.phone) {
       tg.MainButton.show();
+      tg.MainButton.setParams({
+        text: "Зробити замовлення",
+      });
+    } else {
+      tg.MainButton.hide();
     }
   }, [formFilled, tg.MainButton]);
 
@@ -69,7 +67,7 @@ const Form = ({ addedItems, getTotalPrice, queryId }) => {
       <h3>Ваши данные</h3>
       <select
         className={css.select}
-        name="City"
+        name="city" // "city" с маленькой буквы
         value={formFilled.city}
         onChange={onChangeField}
       >
@@ -88,7 +86,7 @@ const Form = ({ addedItems, getTotalPrice, queryId }) => {
 
       <input
         className={css.input}
-        type="number"
+        type="text" // Изменил на "text" для номера телефона
         placeholder="Номер телефону"
         name="phone"
         value={formFilled.phone}
