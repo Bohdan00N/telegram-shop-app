@@ -90,7 +90,6 @@ import ProductItem from "../ProductItem/ProductItem";
 import { useTG } from "../../hooks/useTG";
 import { useNavigate } from "react-router-dom";
 import { products } from "../utils/products";
-import Form from "../Form/Form";
 
 const getTotalPrice = (items = []) => {
   return items.reduce((acc, item) => {
@@ -101,15 +100,14 @@ const getTotalPrice = (items = []) => {
 const ProductList = () => {
   const navigate = useNavigate();
   const [addedItems, setAddedItems] = useState([]);
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const { tg, queryId } = useTG();
+  const { tg } = useTG();
 
   const onShowForm = useCallback(() => {
-    setIsFormVisible(true);
+    navigate("form");
     tg.MainButton.setParams({
       text: "Заполните форму",
     });
-  }, [tg]);
+  }, [tg, navigate]);
 
   useEffect(() => {
     console.log("Setting up event listener for mainButtonClicked");
@@ -145,16 +143,15 @@ const ProductList = () => {
   return (
     <div className={css.list}>
       {products.map((item) => (
-        <ProductItem key={item.id} product={item} onAdd={onAdd} className={css.item} />
-      ))}
-      {isFormVisible && (
-        <Form
-          addedItems={addedItems}
-          getTotalPrice={getTotalPrice}
-          queryId={queryId}
-          navigate={navigate}
+        <ProductItem
+          key={item.id}
+          product={item}
+          onAdd={onAdd}
+          className={css.item}
         />
-      )}
+      ))}
+
+      <button onClick={onShowForm}>Далі</button>
     </div>
   );
 };
