@@ -2,7 +2,7 @@ import { useTG } from "../../hooks/useTG";
 import css from "./form.module.scss";
 import React, { useCallback, useEffect, useState } from "react";
 
-const Form = ({ addedItems, getTotalPrice, queryId, navigate }) => {
+const Form = ({ addedItems, getTotalPrice, queryId }) => {
   const [formFilled, setFormFilled] = useState({
     city: "",
     street: "",
