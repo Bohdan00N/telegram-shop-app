@@ -5,7 +5,7 @@ $background-color: #34495e;
 $button-background: #e74c3c;
 $button-background-hover: #c0392b;
 $border-radius: 10px;
-$shadow-color: rgba(0, 0, 0, 0.2);
+$shadow-color: rgba(251, 251, 251, 0.2);
 
 .product {
   flex: 1 0 calc(25% - 20px);
@@ -20,8 +20,7 @@ $shadow-color: rgba(0, 0, 0, 0.2);
   height: 480px;
 
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px $shadow-color;
+    box-shadow: 0 10px 20px $shadow-color;
   }
 }
 
@@ -66,7 +65,7 @@ $shadow-color: rgba(0, 0, 0, 0.2);
   scrollbar-width: none;
   @media screen and (max-width: 500px) {
     flex: 1 0 calc(100% - 20px);
-    height: auto;
+    height: 60px;
   }
   &::-webkit-scrollbar {
     display: none;
@@ -112,6 +111,6 @@ $shadow-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #11e91c; 
-  transition: opacity 0.8s ease; 
+  color: #11e91c;
+  transition: opacity 0.8s ease;
 }
