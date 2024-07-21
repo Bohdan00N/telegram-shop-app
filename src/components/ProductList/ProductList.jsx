@@ -54,6 +54,7 @@ const ProductList = () => {
           className={css.item}
         />
       ))}
+      <button onClick={onShowForm}>NEXT</button>
     </div>
   );
 };

@@ -22,7 +22,7 @@ const Form = () => {
 
     try {
       const response = await fetch(
-        "https://localhost:3001/order"
+        "http://localhost:3001/order"
         , {
         method: "POST",
         headers: {
