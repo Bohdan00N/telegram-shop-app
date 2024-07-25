@@ -1,35 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../Button/Button";
 import css from "./productItem.module.scss";
 
 const ProductItem = ({ product, onAdd, onRemove }) => {
   const [quantity, setQuantity] = useState(0);
-  useEffect(() => {
-    if (quantity > 0) {
-      onAdd(product, quantity);
-    } else {
-      onRemove(product.id);
-    }
-  }, [quantity, onAdd, onRemove, product]);
-
   const onAddHandler = () => {
-    setQuantity(1);
+    if (quantity === 0) {
+      setQuantity(1);
+      onAdd(product, 1); // добавляем товар в корзину с количеством 1
+    }
   };
 
   const increaseQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    onAdd(product, newQuantity); // обновляем количество в корзине
   };
 
   const decreaseQuantity = () => {
-    setQuantity((prevQuantity) => {
-      if (prevQuantity > 1) {
-        return prevQuantity - 1;
-      } else {
-        return 0;
-      }
-    });
+    const newQuantity = quantity - 1;
+    setQuantity(newQuantity);
+    if (newQuantity > 0) {
+      onAdd(product, newQuantity); // обновляем количество в корзине
+    } else {
+      onRemove(product.id); // удаляем товар из корзины
+    }
   };
-
   return (
     <div className={css.product}>
       <div className={css.imgcont}>

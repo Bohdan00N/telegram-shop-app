@@ -25,7 +25,6 @@ const ProductList = () => {
     };
   }, [onShowForm, tg]);
 
-
   useEffect(() => {
     if (addedItems.length === 0) {
       tg.MainButton.hide();
@@ -40,10 +39,11 @@ const ProductList = () => {
   const onAdd = (product, quantity) => {
     addItem({ ...product, quantity });
   };
+
   const onRemove = (productId) => {
     removeItem(productId);
   };
-  
+
   return (
     <div className={css.list}>
       {products.map((item) => (
