@@ -3,15 +3,30 @@ import Button from "../Button/Button";
 import css from "./productItem.module.scss";
 
 const ProductItem = ({ product, onAdd }) => {
-  const [showPlusOne, setShowPlusOne] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   const onAddHandler = () => {
-    onAdd(product);
-    setShowPlusOne(true);
+    if (quantity === 0) {
+      setQuantity(1);
+      onAdd(product, 1); 
+    } else {
+      onAdd(product, quantity);
+    }
+  };
 
-    setTimeout(() => {
-      setShowPlusOne(false);
-    }, 800);
+  const increaseQuantity = () => {
+    setQuantity(prevQuantity => prevQuantity + 1);
+    onAdd(product, quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(prevQuantity => prevQuantity - 1);
+      onAdd(product, quantity - 1); 
+    } else {
+      setQuantity(0);
+      onAdd(product, 0);
+    }
   };
 
   return (
@@ -27,10 +42,21 @@ const ProductItem = ({ product, onAdd }) => {
           Ціна: <b>{product.price}</b> грн
         </span>
       </h3>
-      <Button className={css.add_btn} onClick={onAddHandler}>
-        Додати в корзину
-      </Button>
-      {showPlusOne && <span className={css.plus_one}>+1</span>}
+      {quantity === 0 ? (
+        <Button className={css.add_btn} onClick={onAddHandler}>
+          Додати в корзину
+        </Button>
+      ) : (
+        <div className={css.quantity_controls}>
+          <button className={css.decrease_btn} onClick={decreaseQuantity}>
+            -
+          </button>
+          <span className={css.quantity}>{quantity}</span>
+          <button className={css.increase_btn} onClick={increaseQuantity}>
+            +
+          </button>
+        </div>
+      )}
     </div>
   );
 };

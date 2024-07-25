@@ -71,7 +71,45 @@ $shadow-color: rgba(251, 251, 251, 0.2);
     display: none;
   }
 }
+.quantity_controls {
+  width: 169px;
+  height: 38px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: $border-radius;
+  background-color: lightgreen;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: lightgreen;
+    transform: scale(1.05);
+  }
 
+  &:active {
+    transform: scale(1);
+  }
+}
+.quantity{
+  font-weight: bold;
+  font-size: 30px;
+}
+.decrease_btn,
+.increase_btn {
+  min-width: 40px;
+  height: 25px;
+  margin: 0 20px;
+  background-color: rgb(48, 167, 161);
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .price {
   font-size: 1.25rem;
   font-weight: bold;
