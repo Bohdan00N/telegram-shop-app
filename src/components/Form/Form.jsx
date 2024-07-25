@@ -12,6 +12,7 @@ const Form = () => {
     time: "",
     desiredTime: "",
   });
+
   const { tg, queryId } = useTG();
   const { addedItems, getTotalPrice } = useCart();
 
@@ -71,6 +72,7 @@ const Form = () => {
       [name]: value,
     }));
   };
+
   const isTimeValid = () => {
     if (formFilled.time === "select" && formFilled.desiredTime) {
       const [hours, minutes] = formFilled.desiredTime.split(":").map(Number);
@@ -111,14 +113,18 @@ const Form = () => {
         <option value="del">Доставка</option>
       </select>
 
-      <input
-        className={css.input}
-        type="text"
-        placeholder="Адреса"
-        name="street"
-        value={formFilled.street}
-        onChange={onChangeField}
-      />
+      {formFilled.delivery === "del" && (
+        <>
+          <input
+            className={css.input}
+            type="text"
+            placeholder="Адреса"
+            name="street"
+            value={formFilled.street}
+            onChange={onChangeField}
+          />
+        </>
+      )}
 
       <input
         className={css.input}
@@ -128,6 +134,7 @@ const Form = () => {
         value={formFilled.phone}
         onChange={onChangeField}
       />
+      
       <select
         className={css.select}
         name="time"
@@ -153,6 +160,7 @@ const Form = () => {
           value={formFilled.desiredTime}
         />
       )}
+      
       {formFilled.time === "select" && !isTimeValid() && (
         <div className={css.error}>
           Ми працюэмо з 10:00 до 22:00. Будь ласка, виберіть коректний час.
