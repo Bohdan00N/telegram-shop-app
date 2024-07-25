@@ -6,8 +6,11 @@ import { useCart } from "../../hooks/cartContext";
 const Form = () => {
   const [formFilled, setFormFilled] = useState({
     city: "",
+    delivery: "",
     street: "",
     phone: "",
+    time: "",
+    desiredTime: "",
   });
   const { tg, queryId } = useTG();
   const { addedItems, getTotalPrice } = useCart();
@@ -21,9 +24,7 @@ const Form = () => {
     };
 
     try {
-      const response = await fetch(
-        "https://localhost:3001/order"
-        , {
+      const response = await fetch("https://localhost:3001/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +48,13 @@ const Form = () => {
   }, [onSendData, tg]);
 
   useEffect(() => {
-    if (formFilled.city && formFilled.street && formFilled.phone) {
+    if (
+      formFilled.city &&
+      formFilled.street &&
+      formFilled.phone &&
+      formFilled.delivery &&
+      formFilled.time
+    ) {
       tg.MainButton.show();
       tg.MainButton.setParams({
         text: "Зробити замовлення",
@@ -64,19 +71,41 @@ const Form = () => {
       [name]: value,
     }));
   };
+  const isTimeValid = () => {
+    if (formFilled.time === "select") {
+      const [hours, minutes] = formFilled.desiredTime.split(":").map(Number);
+      return hours < 22 || (hours === 22 && minutes === 0);
+    }
+    return true;
+  };
 
   return (
     <div className={css.form}>
       <h3>Дані замовлення</h3>
       <select
         className={css.select}
-        name="city" 
+        name="city"
         value={formFilled.city}
         onChange={onChangeField}
       >
-        <option value=""></option>
+        <option value="" disabled>
+          Оберіть місто
+        </option>
         <option value="Lozova">Лозова</option>
         <option value="Uman">Умань</option>
+      </select>
+
+      <select
+        className={css.select}
+        name="delivery"
+        value={formFilled.delivery}
+        onChange={onChangeField}
+      >
+        <option value="" disabled>
+          Спосіб доставки
+        </option>
+        <option value="cafe">Самовивіз</option>
+        <option value="del">Доставка</option>
       </select>
 
       <input
@@ -90,13 +119,42 @@ const Form = () => {
 
       <input
         className={css.input}
-        type="tel" 
+        type="tel"
         placeholder="Номер телефону"
         name="phone"
         value={formFilled.phone}
         onChange={onChangeField}
       />
-      <button onClick={onSendData}>-------------------------------</button>
+      <select
+        className={css.select}
+        name="time"
+        value={formFilled.time}
+        onChange={onChangeField}
+      >
+        <option value="" disabled>
+          Виберіть бажаний час отримання
+        </option>
+        <option value="asap">Як можна раніше</option>
+        <option value="select">Вибрати час самостійно</option>
+      </select>
+
+      {formFilled.time === "select" && (
+        <input
+          className={css.input}
+          type="time"
+          placeholder="Введіть час"
+          name="desiredTime"
+          onChange={onChangeField}
+          max="22:00" 
+          min="10:00"
+          value={formFilled.desiredTime}
+        />
+      )}
+      {!isTimeValid() && (
+        <div className={css.error}>
+          Ми працюємо з 10:00 до 22:00. Будь ласка, отримайте раніше.
+        </div>
+      )}
     </div>
   );
 };
