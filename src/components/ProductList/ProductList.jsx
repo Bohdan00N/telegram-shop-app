@@ -9,7 +9,7 @@ import { useCart } from "../../hooks/cartContext";
 const ProductList = () => {
   const navigate = useNavigate();
   const { tg } = useTG();
-  const { addedItems, addItem,  getTotalPrice } = useCart();
+  const { addedItems, addItem, removeItem, getTotalPrice } = useCart();
 
   const onShowForm = useCallback(() => {
     navigate("form");
@@ -24,6 +24,8 @@ const ProductList = () => {
       tg.offEvent("mainButtonClicked", onShowForm);
     };
   }, [onShowForm, tg]);
+
+
   useEffect(() => {
     if (addedItems.length === 0) {
       tg.MainButton.hide();
@@ -35,10 +37,13 @@ const ProductList = () => {
     }
   }, [addedItems, getTotalPrice, tg]);
 
-  const onAdd = (product) => {
-    addItem(product);
+  const onAdd = (product, quantity) => {
+    addItem({ ...product, quantity });
   };
-
+  const onRemove = (productId) => {
+    removeItem(productId);
+  };
+  
   return (
     <div className={css.list}>
       {products.map((item) => (
@@ -46,6 +51,7 @@ const ProductList = () => {
           key={item.id}
           product={item}
           onAdd={onAdd}
+          onRemove={onRemove}
           className={css.item}
         />
       ))}

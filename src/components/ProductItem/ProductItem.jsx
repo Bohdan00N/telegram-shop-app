@@ -1,32 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import css from "./productItem.module.scss";
 
-const ProductItem = ({ product, onAdd }) => {
+const ProductItem = ({ product, onAdd, onRemove }) => {
   const [quantity, setQuantity] = useState(0);
+  useEffect(() => {
+    if (quantity > 0) {
+      onAdd(product, quantity);
+    } else {
+      onRemove(product.id);
+    }
+  }, [quantity, onAdd, onRemove, product]);
 
   const onAddHandler = () => {
-    if (quantity === 0) {
-      setQuantity(1);
-      onAdd(product, 1); 
-    } else {
-      onAdd(product, quantity);
-    }
+    setQuantity(1);
   };
 
   const increaseQuantity = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
-    onAdd(product, quantity + 1);
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
 
   const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(prevQuantity => prevQuantity - 1);
-      onAdd(product, quantity - 1); 
-    } else {
-      setQuantity(0);
-      onAdd(product, 0);
-    }
+    setQuantity((prevQuantity) => {
+      if (prevQuantity > 1) {
+        return prevQuantity - 1;
+      } else {
+        return 0;
+      }
+    });
   };
 
   return (
