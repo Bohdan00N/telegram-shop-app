@@ -10,8 +10,6 @@ const images = importAll(
   require.context("../utils/menu_images", false, /\.(png|jpe?g|svg)$/)
 );
 
-console.log(images);
-
 export const products = [
   {
     id: "1",
