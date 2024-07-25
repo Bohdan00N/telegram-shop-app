@@ -24,18 +24,19 @@ const ProductList = () => {
       tg.offEvent("mainButtonClicked", onShowForm);
     };
   }, [onShowForm, tg]);
-
-  const onAdd = (product) => {
-    addItem(product);
-
+  useEffect(() => {
     if (addedItems.length === 0) {
       tg.MainButton.hide();
     } else {
       tg.MainButton.show();
       tg.MainButton.setParams({
-        text: `Замовити на суму ${getTotalPrice()}`,
+        text: `Замовити на суму ${getTotalPrice()} грн`,
       });
     }
+  }, [addedItems, getTotalPrice, tg]);
+
+  const onAdd = (product) => {
+    addItem(product);
   };
 
   return (
