@@ -9,7 +9,7 @@ import { useCart } from "../../hooks/cartContext";
 const ProductList = () => {
   const navigate = useNavigate();
   const { tg } = useTG();
-  const { addedItems, addItem, removeItem, getTotalPrice } = useCart();
+  const { addedItems, addItem,  getTotalPrice } = useCart();
 
   const onShowForm = useCallback(() => {
     navigate("form");
@@ -26,20 +26,14 @@ const ProductList = () => {
   }, [onShowForm, tg]);
 
   const onAdd = (product) => {
-    const alreadyAdded = addedItems.find((item) => item.id === product.id);
-
-    if (alreadyAdded) {
-      removeItem(product.id);
-    } else {
-      addItem(product);
-    }
+    addItem(product);
 
     if (addedItems.length === 0) {
       tg.MainButton.hide();
     } else {
       tg.MainButton.show();
       tg.MainButton.setParams({
-        text: `Купить ${getTotalPrice()}`,
+        text: `Замовити на суму ${getTotalPrice()}`,
       });
     }
   };
