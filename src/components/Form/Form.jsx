@@ -72,9 +72,12 @@ const Form = () => {
     }));
   };
   const isTimeValid = () => {
-    if (formFilled.time === "select") {
+    if (formFilled.time === "select" && formFilled.desiredTime) {
       const [hours, minutes] = formFilled.desiredTime.split(":").map(Number);
-      return hours < 22 || (hours === 22 && minutes === 0);
+      return (
+        (hours > 10 || (hours === 10 && minutes >= 0)) &&
+        (hours < 22 || (hours === 22 && minutes === 0))
+      );
     }
     return true;
   };
@@ -145,14 +148,14 @@ const Form = () => {
           placeholder="Введіть час"
           name="desiredTime"
           onChange={onChangeField}
-          max="22:00" 
+          max="22:00"
           min="10:00"
           value={formFilled.desiredTime}
         />
       )}
-      {!isTimeValid() && (
+      {formFilled.time === "select" && !isTimeValid() && (
         <div className={css.error}>
-          Ми працюємо з 10:00 до 22:00. Будь ласка, отримайте раніше.
+          Ми працюэмо з 10:00 до 22:00. Будь ласка, виберіть коректний час.
         </div>
       )}
     </div>
