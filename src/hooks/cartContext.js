@@ -9,16 +9,13 @@ export const CartProvider = ({ children }) => {
 
   const addItem = (product) => {
     setAddedItems((prevItems) => {
-      // Проверяем, есть ли уже этот товар в корзине
       const existingItem = prevItems.find((item) => item.id === product.id);
 
       if (existingItem) {
-        // Если товар уже есть, обновляем его количество
         return prevItems.map((item) =>
           item.id === product.id ? { ...item, quantity: product.quantity } : item
         );
       } else {
-        // Если товара нет, добавляем новый с quantity
         return [...prevItems, { ...product, quantity: product.quantity }];
       }
     });

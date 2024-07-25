@@ -7,23 +7,23 @@ const ProductItem = ({ product, onAdd, onRemove }) => {
   const onAddHandler = () => {
     if (quantity === 0) {
       setQuantity(1);
-      onAdd(product, 1); // добавляем товар в корзину с количеством 1
+      onAdd(product, 1); 
     }
   };
 
   const increaseQuantity = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
-    onAdd(product, newQuantity); // обновляем количество в корзине
+    onAdd(product, newQuantity); 
   };
 
   const decreaseQuantity = () => {
     const newQuantity = quantity - 1;
     setQuantity(newQuantity);
     if (newQuantity > 0) {
-      onAdd(product, newQuantity); // обновляем количество в корзине
+      onAdd(product, newQuantity); 
     } else {
-      onRemove(product.id); // удаляем товар из корзины
+      onRemove(product.id); 
     }
   };
   return (
