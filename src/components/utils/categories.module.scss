@@ -1,0 +1,35 @@
+.categories {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    background: #9c002a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #dcdcdc;
+    transition: background-color 0.5s, scale 0.5s, font-weight 0.5s,
+      box-shadow 0.5s, font-size 0.5s;
+
+    &:hover {
+      background-color: #dcdcdc;
+      color: #9c002a;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    &.active {
+      color: #dcdcdc;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 5px 10px rgba(180, 157, 157, 0.2);
+      scale: 115%;
+      background-color: #922b60;
+      transition: background-color 0.5s, scale 0.5s, font-weight 0.5s,
+      box-shadow 0.5s, font-size 0.5s;
+    }
+  }
+}
