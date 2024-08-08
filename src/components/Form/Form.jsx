@@ -25,7 +25,7 @@ const Form = () => {
     };
 
     try {
-      const response = await fetch("https://localhost:3001/order", {
+      const response = await fetch("https://sushi-tg.local/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
